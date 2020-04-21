@@ -1,0 +1,33 @@
+{
+  "name": "whiteboardjs",
+  "version": "1.0.0",
+  "description": "A tiny HTML Witheboard app based on powerfull web modules",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionutfinta/WhiteboardJS.git"
+  },
+  "keywords": [
+    "whiteboard",
+    "html",
+    "tiny"
+  ],
+  "author": "Finta Ionut",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ionutfinta/WhiteboardJS/issues"
+  },
+  "homepage": "https://github.com/ionutfinta/WhiteboardJS#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "jquery-ui-dist": "^1.12.1",
+    "line-awesome": "^1.3.0",
+    "popper.js": "^1.16.1",
+    "tinymce": "^4.9.9"
+  }
+}

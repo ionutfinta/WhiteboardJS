@@ -1,0 +1,15 @@
+/*** Content **/
+#content{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/*** User Interface ***/
+#toolbar{
+    top: 15vh;
+    left: 3vh;
+}
+
+#move-toolbar {
+    cursor: move;
+}
