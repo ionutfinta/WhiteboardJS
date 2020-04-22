@@ -104,8 +104,8 @@ $(function(){
                 
                 newEl.css({
                     "position": "absolute",
-                    "top": parseInt($(this).css("top")) + event.pageY,
-                    "left": parseInt($(this).css("left")) + event.pageX,
+                    "top": Math.abs(parseInt($(this).css("top"))) + event.pageY,
+                    "left": Math.abs(parseInt($(this).css("left"))) + event.pageX,
                     "min-width": "62px",
                     "min-height": "24px"
                 });
@@ -120,8 +120,8 @@ $(function(){
                 
                 newEl.css({
                     "position": "absolute",
-                    "top": parseInt($(this).css("top")) + event.pageY,
-                    "left": parseInt($(this).css("left")) + event.pageX,
+                    "top": Math.abs(parseInt($(this).css("top"))) + event.pageY,
+                    "left": Math.abs(parseInt($(this).css("left"))) + event.pageX,
                     "border": "1px solid black",
                     "width": "64px",
                     "height": "64px"
@@ -138,8 +138,8 @@ $(function(){
                 
                 newEl.css({
                     "position": "absolute",
-                    "top": parseInt($(this).css("top")) + event.pageY,
-                    "left": parseInt($(this).css("left")) + event.pageX,
+                    "top": Math.abs(parseInt($(this).css("top"))) + event.pageY,
+                    "left": Math.abs(parseInt($(this).css("left"))) + event.pageX,
                     "border": "1px solid black",
                     "border-radius": "100%",
                     "width": "64px",
