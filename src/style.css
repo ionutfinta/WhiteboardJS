@@ -1,7 +1,24 @@
 /*** Content **/
-#content{
+#app .wbjs-content{
     min-width: 100%;
     min-height: 100%;
+}
+.wbjs-el:hover{
+    outline: 1px solid aliceblue;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 120, 250, 0.75);
+    -moz-box-shadow:    0px 0px 5px 0px rgba(0, 120, 250, 0.75);
+    box-shadow:         0px 0px 5px 0px rgba(0, 120, 250, 0.75);
+}
+.wbjs-el div.drg-btn{
+    opacity: 0;
+    cursor: move;
+    left: -300000px;
+    -webkit-transition: opacity .3s linear;
+            transition: opacity .3s linear;
+}
+.wbjs-el:hover div.drg-btn{
+    opacity: 1;
+    left: -30px;
 }
 
 /*** User Interface ***/

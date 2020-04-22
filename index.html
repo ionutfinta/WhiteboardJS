@@ -15,10 +15,9 @@
     <title>WhiteboardJS - The tiny web Whiteboard</title>
 
   </head>
-  <body class="vw-100 vh-100 overflow-hidden">
+  <body id="app">
     <!-- Unlimited Board -->
-    <div class="bg-light position-absolute" id="content">
-    </div>
+    <div class="bg-light position-absolute wbjs-content"></div>
 
     <!-- User Interface -->
     <div class="position-absolute d-print-none" id="toolbar">
@@ -33,28 +32,31 @@
             <div class="card-body p-0 collapse show" id="tools-colapsable">
                 <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-dark active" data-toggle="tooltip" data-placement="right" title="Pointeur, Déplaceur, Sélecteur">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="las la-mouse-pointer"></i>
+                        <input type="radio" name="toolRadio" id="mouseTool" autocomplete="off" checked> <i class="las la-mouse-pointer"></i>
                     </label>
                     <label class="btn btn-dark">
-                        <input type="radio" name="options" id="option2" autocomplete="off"><i class="las la-font"></i>
+                        <input type="radio" name="toolRadio" id="textTool" autocomplete="off"><i class="las la-font"></i>
                     </label>
                     <label class="btn btn-dark">
-                        <input type="radio" name="options" id="option3" autocomplete="off"><i class="las la-vector-square"></i>
+                        <input type="radio" name="toolRadio" id="rectTool" autocomplete="off"><i class="las la-vector-square"></i>
                     </label>
                     <label class="btn btn-dark">
-                        <input type="radio" name="options" id="option4" autocomplete="off"><i class="las la-circle"></i>
+                        <input type="radio" name="toolRadio" id="circleTool" autocomplete="off"><i class="las la-circle"></i>
                     </label>
-                    <label class="btn btn-dark">
-                        <input type="radio" name="options" id="option5" autocomplete="off"><i class="las la-square-root-alt"></i>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="mathsTool" autocomplete="off"><i class="las la-square-root-alt"></i>
                     </label>
-                    <label class="btn btn-dark">
-                        <input type="radio" name="options" id="option6" autocomplete="off"><i class="las la-th"></i>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="codeTool" autocomplete="off"><i class="las la-code"></i>
                     </label>
-                    <label class="btn btn-dark">
-                        <input type="radio" name="options" id="option7" autocomplete="off"><i class="las la-pen"></i>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="girdTool" autocomplete="off"><i class="las la-th"></i>
                     </label>
-                    <label class="btn btn-dark">
-                        <input type="radio" name="options" id="option8" autocomplete="off"><i class="las la-question-circle"></i>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="penTool" autocomplete="off"><i class="las la-pen"></i>
+                    </label>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="helpTool" autocomplete="off"><i class="las la-question-circle"></i>
                     </label>
                 </div>
 
@@ -64,9 +66,8 @@
                         <i class="las la-bars"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Menu action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item disabled" href="#" aria-disabled="true">Export html</a>
+                    <a class="dropdown-item disabled" href="#" aria-disabled="true">Import html</a>
                     </div>
                 </div>
             </div>
@@ -104,7 +105,7 @@
     <script src="./node_modules/tinymce/jquery.tinymce.min.js"></script>
     
     <!-- Whiteboard JS -->
-    <script src="src/whiteboard.js"></script>
+    <script src="src/jquery.whiteboard.js"></script>
 
   </body>
 </html>
