@@ -6,16 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Dependencies -->
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./node_modules/jquery-ui-dist/jquery-ui.min.css">
-    <link rel="stylesheet" href="./node_modules/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="icon" href="./favicon.ico"/>
 
     <!-- WhiteboardJS -->
-    <link rel="stylesheet" href="src/style.css">
+    <style>
+      #app .wbjs-content{min-width:100%;min-height:100%}.wbjs-el:hover{outline:1px solid #f0f8ff;-webkit-box-shadow:0 0 5px 0 rgba(0,120,250,.75);-moz-box-shadow:0 0 5px 0 rgba(0,120,250,.75);box-shadow:0 0 5px 0 rgba(0,120,250,.75)}.wbjs-el div.drg-btn{opacity:0;cursor:move;left:-300000px;-webkit-transition:opacity .3s linear;transition:opacity .3s linear}.wbjs-el:hover div.drg-btn{opacity:1;left:-30px}#toolbar{top:15vh;left:3vh}#move-toolbar{cursor:move}
+    </style>
     <title>WhiteboardJS - The tiny web Whiteboard</title>
 
   </head>
   <body id="app">
+    <main role="main">
+    <header>
+      <div class="bg-dark collapse" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">WhiteBoardJS is a tiny, user-friendly, powerfull web whitboard. Powered by jQuery, Bootstrap, Line Awesome, TinyMCE and more coming soon !</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Links</h4>
+              <ul class="list-unstyled">
+                <li><a href="https://github.com/ionutfinta/WhiteboardJS/" class="text-white">See on Github</a></li>
+                <li><a href="mailto:contact@itized.com" class="text-white">Email me</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <strong>WhiteboardJS</strong>
+          </a>
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+      <section class="jumbotron text-center m-5">
+          <div class="container">
+            <h1 class="jumbotron-heading">WhiteBoardJS</h1>
+            <p class="lead text-muted">WhiteBoardJS is a tiny, user-friendly, powerfull web whitboard. It can be very usefull !</p>
+            <p>
+              <a href="https://github.com/ionutfinta/WhiteboardJS/" class="btn btn-primary my-2">See on Github</a>
+              <a href="#" id="gotoDemo" class="btn btn-secondary my-2" data-toggle="modal" data-target="#welcomeModal">Live Demo</a>
+            </p>
+          </div>
+        </section>
+    </main>
     <!-- Unlimited Board -->
     <div class="bg-light position-absolute wbjs-content"></div>
 
@@ -75,11 +120,11 @@
     </div>
 
     <!-- Welcome Window -->
-    <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle"> Welcome to WhiteboardJS ! </h5>
+              <h5 class="modal-title"> Welcome to WhiteboardJS ! </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -96,16 +141,23 @@
       </div>
 
     <!-- jQuery, Popper.js, Bootstrap JS, jQuery-ui, TinyMCE  -->
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap needs popper but not adapted npm... -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="./node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
-    <script src="./node_modules/tinymce/tinymce.min.js"></script>
-    <script src="./node_modules/tinymce/jquery.tinymce.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.6/tinymce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.6/jquery.tinymce.min.js"></script>
     
     <!-- Whiteboard JS -->
-    <script src="src/jquery.whiteboard.js"></script>
+    <script>
+      var elID=tool=0,appSelector="#app",contentSelector=appSelector+" .wbjs-content";$(function(){$(appSelector).addClass("vw-100").addClass("vh-100").addClass("overflow-hidden"),$("input[name='toolRadio']").change(function(){switch($(this).attr("id")){case"mouseTool":tool=0,$(contentSelector).css({cursor:"grab"});break;case"textTool":tool=1,$(contentSelector).css("cursor","text");break;case"rectTool":tool=2,$(contentSelector).css("cursor","crosshair");break;case"circleTool":tool=3,$(contentSelector).css("cursor","crosshair")}$(appSelector).css({cursor:"text"})}),$("#welcomeModal.modal").modal().show(),$("#toolbar").draggable({handle:"#move-toolbar",containment:appSelector,scroll:!1}),$(contentSelector).draggable({start:function(){$(this).css("cursor","grabbing")},stop:function(){var t=parseInt($(this).css("top")),s=parseInt($(this).css("left"));(t>0||s>0)&&($(this).children().css({top:"+="+t,left:"+="+s}),$(this).css({width:"+="+s,height:"+="+t,top:"0",left:"0"}));var e=$(appSelector).height()-t-$(this).height();t<0&&e>0&&$(this).css({height:"+="+e});var l=$(appSelector).width()-s-$(this).width();s<0&&l>0&&$(this).css({width:"+="+l}),$(this).css("cursor","grab")},cancel:contentSelector+" *",scroll:!1}),$(contentSelector).click(function(t){switch(tool){case 1:(s=$(contentSelector).append('<div class="wbjs-el"><div class="btn btn-link position-absolute drg-btn"><i class="las la-arrows-alt"></i></div><p class="p-2 m-0" id="wbjs-el-'+elID+'"></p></div>').children(":last-child")).children("p").tinymce({menubar:!1,inline:!0,plugins:["link","textcolor","contextmenu","autolink"],toolbar:["bold italic underline | fontsizeselect | forecolor backcolor"],auto_focus:"wbjs-el-"+elID}),s.css({position:"absolute",top:Math.abs(parseInt($(this).css("top")))+t.pageY,left:Math.abs(parseInt($(this).css("left")))+t.pageX,"min-width":"62px","min-height":"24px"}),$("#mouseTool").trigger("click"),s.draggable({handle:"div.btn",scroll:!1}),elID++;break;case 2:(s=$(contentSelector).append('<div class="wbjs-el" id="wbjs-el-'+elID+'"><div class="btn btn-link position-absolute drg-btn"><i class="las la-arrows-alt"></i></div></div>').children(":last-child")).css({position:"absolute",top:Math.abs(parseInt($(this).css("top")))+t.pageY,left:Math.abs(parseInt($(this).css("left")))+t.pageX,border:"1px solid black",width:"64px",height:"64px"}),$("#mouseTool").trigger("click"),s.draggable({scroll:!1}),s.resizable(),elID++;break;case 3:var s;(s=$(contentSelector).append('<div class="wbjs-el" id="wbjs-el-'+elID+'"><div class="btn btn-link position-absolute drg-btn"><i class="las la-arrows-alt"></i></div></div>').children(":last-child")).css({position:"absolute",top:Math.abs(parseInt($(this).css("top")))+t.pageY,left:Math.abs(parseInt($(this).css("left")))+t.pageX,border:"1px solid black","border-radius":"100%",width:"64px",height:"64px"}),$("#mouseTool").trigger("click"),s.draggable({scroll:!1}),s.resizable(),elID++}})
+      $("#app > *:not(main)").css('z-index', '-500');
+      $("#gotoDemo").click(function(){
+        $("#app > *").css('z-index', '500');
+        $("main").hide();
+      });
+    });
+    </script>
 
   </body>
 </html>

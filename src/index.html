@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Dependencies -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/jquery-ui-dist/jquery-ui.min.css">
+    <link rel="stylesheet" href="./node_modules/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <link rel="icon" href="./favicon.ico"/>
+
+    <!-- WhiteboardJS -->
+    <link rel="stylesheet" href="style.css">
+    <title>WhiteboardJS - The tiny web Whiteboard</title>
+
+  </head>
+  <body id="app">
+    <!-- Unlimited Board -->
+    <div class="bg-light position-absolute wbjs-content"></div>
+
+    <!-- User Interface -->
+    <div class="position-absolute d-print-none" id="toolbar">
+        <!-- Toolbar -->
+        <div class="card text-white bg-dark" style="width: 4rem;">
+            <div class="card-header p-0">
+                <i class="position-absolute p-2 las la-arrows-alt" id="move-toolbar"></i>
+                <button type="button" class="btn btn-dark float-right" data-toggle="collapse" data-target="#tools-colapsable" aria-expanded="false" aria-controls="tools-colapsable">
+                    <i class="las la-chevron-down"></i>
+                </button>
+            </div>
+            <div class="card-body p-0 collapse show" id="tools-colapsable">
+                <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-dark active" data-toggle="tooltip" data-placement="right" title="Pointeur, Déplaceur, Sélecteur">
+                        <input type="radio" name="toolRadio" id="mouseTool" autocomplete="off" checked> <i class="las la-mouse-pointer"></i>
+                    </label>
+                    <label class="btn btn-dark">
+                        <input type="radio" name="toolRadio" id="textTool" autocomplete="off"><i class="las la-font"></i>
+                    </label>
+                    <label class="btn btn-dark">
+                        <input type="radio" name="toolRadio" id="rectTool" autocomplete="off"><i class="las la-vector-square"></i>
+                    </label>
+                    <label class="btn btn-dark">
+                        <input type="radio" name="toolRadio" id="circleTool" autocomplete="off"><i class="las la-circle"></i>
+                    </label>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="mathsTool" autocomplete="off"><i class="las la-square-root-alt"></i>
+                    </label>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="codeTool" autocomplete="off"><i class="las la-code"></i>
+                    </label>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="girdTool" autocomplete="off"><i class="las la-th"></i>
+                    </label>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="penTool" autocomplete="off"><i class="las la-pen"></i>
+                    </label>
+                    <label class="btn btn-dark disabled">
+                        <input type="radio" name="toolRadio" id="helpTool" autocomplete="off"><i class="las la-question-circle"></i>
+                    </label>
+                </div>
+
+                <!-- Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="las la-bars"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item disabled" href="#" aria-disabled="true">Export html</a>
+                    <a class="dropdown-item disabled" href="#" aria-disabled="true">Import html</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Window -->
+    <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle"> Welcome to WhiteboardJS ! </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              WhiteboardJS is a tiny powerfull whiteboard that you can use everywhere !<br />
+              Close this message and get impressed !
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- jQuery, Popper.js, Bootstrap JS, jQuery-ui, TinyMCE  -->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap needs popper but not adapted npm... -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+    <script src="./node_modules/tinymce/tinymce.min.js"></script>
+    <script src="./node_modules/tinymce/jquery.tinymce.min.js"></script>
+    
+    <!-- Whiteboard JS -->
+    <script src="jquery.whiteboard.js"></script>
+
+  </body>
+</html>
