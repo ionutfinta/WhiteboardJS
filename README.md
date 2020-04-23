@@ -3,13 +3,8 @@
 A tiny HTML Witheboard app based on powerfull web modules (Bootstrap, TinyMCE, jQuery-UI).
 
 ## How-to for _normal people_
-You can find all you need in /release directory.
 
-Windows users can take self-extracting installer (WhiteBoardJS.exe)
-
-7z file is for Linux users.
-
-    Extract and open "index.html" in your web browser
+Simple go on https://ionutfinta.github.io/WhiteboardJS/ and use it.
 
 ## How-to for _developpers_
 
