@@ -182,13 +182,11 @@ $(function(){
     $(contentSelector).on("touchmove", function() { touchMoved = true; });
     $(contentSelector).on("touchend", function(event) {
         if (!touchMoved && tool !== 0) {
-            // Use the touch coordinates from changedTouches
-            var touch = event.originalEvent.changedTouches[0];
-            var fakeEvent = {
-                pageX: touch.pageX,
-                pageY: touch.pageY
-            };
-            addElement(fakeEvent);
+            var changedTouches = event.originalEvent && event.originalEvent.changedTouches;
+            if (changedTouches && changedTouches.length > 0) {
+                var touch = changedTouches[0];
+                addElement({ pageX: touch.pageX, pageY: touch.pageY });
+            }
         }
     });
 });
