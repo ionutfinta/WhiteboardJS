@@ -1,7 +1,25 @@
 var http = require('http');
 var fs = require('fs');
 
-const PORT=8080;
+var PORT = process.env.PORT || 8080;
+
+var mimeTypes = {
+    '.html': 'text/html',
+    '.htm':  'text/html',
+    '.js':   'application/javascript',
+    '.css':  'text/css',
+    '.ico':  'image/x-icon',
+    '.png':  'image/png',
+    '.jpg':  'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.gif':  'image/gif',
+    '.svg':  'image/svg+xml',
+    '.woff': 'font/woff',
+    '.woff2':'font/woff2',
+    '.ttf':  'font/ttf',
+    '.eot':  'application/vnd.ms-fontobject',
+    '.json': 'application/json'
+};
 
 http.createServer(function(request, response) {
     var url = request.url;
@@ -14,25 +32,17 @@ http.createServer(function(request, response) {
 
     fs.access("." + url,  fs.constants.R_OK, (err) => {
         if(err){
-            response.writeHeader(404, {"Content-Type": "text"});
-            response.write("Error 404: The ressource you want is not found.");
-            response.end("Error 404: The ressource you want is not found.");
-            console.log(`.${url} ${err ? 'is not readable' : 'is readable'}`);
+            response.writeHead(404, {"Content-Type": "text/plain"});
+            response.end("Error 404: The resource you want is not found.");
+            console.log("." + url + " is not readable");
         }else{
             fs.readFile("." + url, function (err, ctt) {
                 if (err) throw err;
             
-                if(url.endsWith(".htm") || url.endsWith(".html"))
-                    response.writeHeader(200, {"Content-Type": "text/html"});
-                else if(url.endsWith(".js"))
-                    response.writeHeader(200, {"Content-Type": "application/javascript"});
-                else if(url.endsWith(".css"))
-                    response.writeHeader(200, {"Content-Type": "text/css"});
-                else if(url.endsWith(".ico"))
-                    response.writeHeader(200, {"Content-Type": "image/x-icon"});
-                else
-                    response.writeHeader(200, {"Content-Type": "text/plain"});
+                var ext = url.substring(url.lastIndexOf('.'));
+                var contentType = mimeTypes[ext] || 'application/octet-stream';
                 
+                response.writeHead(200, {"Content-Type": contentType});
                 response.write(ctt);
                 response.end();
             });
@@ -40,4 +50,4 @@ http.createServer(function(request, response) {
       });
 }).listen(PORT);
     
-console.log("Server running... \n Open http://127.0.0.1:8080/ in your favourite web browser !");
+console.log("Server running... \n Open http://127.0.0.1:" + PORT + "/ in your favourite web browser !");

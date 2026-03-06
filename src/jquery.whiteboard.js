@@ -9,6 +9,17 @@ var elID = tool = 0;
 var appSelector = "#app";
 var contentSelector = appSelector + " .wbjs-content";
 
+// Helper: get page coordinates from mouse or touch event
+function getEventCoords(event) {
+    if (event.originalEvent && event.originalEvent.touches && event.originalEvent.touches.length) {
+        return {
+            pageX: event.originalEvent.touches[0].pageX,
+            pageY: event.originalEvent.touches[0].pageY
+        };
+    }
+    return { pageX: event.pageX, pageY: event.pageY };
+}
+
 $(function(){
     //-- Formating the app
     $(appSelector).addClass("vw-100").addClass("vh-100").addClass("overflow-hidden");
@@ -42,7 +53,7 @@ $(function(){
     //-- Toolbar dragging
     $("#toolbar").draggable({handle: "#move-toolbar", containment: appSelector, scroll: false});
 
-    //-- Content containerdragging.
+    //-- Content container dragging.
     $(contentSelector).draggable({
         start: function(){
             $(this).css("cursor", "grabbing");
@@ -88,8 +99,16 @@ $(function(){
         scroll:false
     });
 
-    //-- Elements adding
-    $(contentSelector).click(function(event){
+    //-- Prevent default touch behavior on canvas to avoid scrolling
+    document.querySelector(contentSelector).addEventListener("touchmove", function(e) {
+        if (tool !== 0) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    //-- Elements adding (supports both click and tap)
+    function addElement(event) {
+        var coords = getEventCoords(event);
         switch(tool){
             case 1:
                 var newEl = $(contentSelector).append('<div class="wbjs-el"><div class="btn btn-link position-absolute drg-btn"><i class="las la-arrows-alt"></i></div><p class="p-2 m-0" id="wbjs-el-'+elID+'"></p></div>').children(":last-child");
@@ -104,8 +123,8 @@ $(function(){
                 
                 newEl.css({
                     "position": "absolute",
-                    "top": Math.abs(parseInt($(this).css("top"))) + event.pageY,
-                    "left": Math.abs(parseInt($(this).css("left"))) + event.pageX,
+                    "top": Math.abs(parseInt($(contentSelector).css("top"))) + coords.pageY,
+                    "left": Math.abs(parseInt($(contentSelector).css("left"))) + coords.pageX,
                     "min-width": "62px",
                     "min-height": "24px"
                 });
@@ -120,8 +139,8 @@ $(function(){
                 
                 newEl.css({
                     "position": "absolute",
-                    "top": Math.abs(parseInt($(this).css("top"))) + event.pageY,
-                    "left": Math.abs(parseInt($(this).css("left"))) + event.pageX,
+                    "top": Math.abs(parseInt($(contentSelector).css("top"))) + coords.pageY,
+                    "left": Math.abs(parseInt($(contentSelector).css("left"))) + coords.pageX,
                     "border": "1px solid black",
                     "width": "64px",
                     "height": "64px"
@@ -138,8 +157,8 @@ $(function(){
                 
                 newEl.css({
                     "position": "absolute",
-                    "top": Math.abs(parseInt($(this).css("top"))) + event.pageY,
-                    "left": Math.abs(parseInt($(this).css("left"))) + event.pageX,
+                    "top": Math.abs(parseInt($(contentSelector).css("top"))) + coords.pageY,
+                    "left": Math.abs(parseInt($(contentSelector).css("left"))) + coords.pageX,
                     "border": "1px solid black",
                     "border-radius": "100%",
                     "width": "64px",
@@ -152,6 +171,24 @@ $(function(){
                 newEl.resizable();
                 elID++;
                 break;
+        }
+    }
+
+    $(contentSelector).on("click", addElement);
+
+    //-- Touch: single-tap to add element (ignore drags)
+    var touchMoved = false;
+    $(contentSelector).on("touchstart", function() { touchMoved = false; });
+    $(contentSelector).on("touchmove", function() { touchMoved = true; });
+    $(contentSelector).on("touchend", function(event) {
+        if (!touchMoved && tool !== 0) {
+            // Use the touch coordinates from changedTouches
+            var touch = event.originalEvent.changedTouches[0];
+            var fakeEvent = {
+                pageX: touch.pageX,
+                pageY: touch.pageY
+            };
+            addElement(fakeEvent);
         }
     });
 });
