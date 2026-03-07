@@ -2,6 +2,7 @@
 #app .wbjs-content{
     min-width: 100%;
     min-height: 100%;
+    touch-action: none;
 }
 .wbjs-el:hover{
     outline: 1px solid aliceblue;
@@ -25,8 +26,34 @@
 #toolbar{
     top: 15vh;
     left: 3vh;
+    z-index: 1000;
 }
 
 #move-toolbar {
     cursor: move;
+}
+
+/*** Touch-friendly: always show drag handles on touch devices ***/
+@media (pointer: coarse) {
+    .wbjs-el div.drg-btn {
+        opacity: 1;
+        left: -30px;
+    }
+    .wbjs-el div.drg-btn i {
+        font-size: 1.4em;
+    }
+    #toolbar .btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/*** Print: hide UI, show only board content ***/
+@media print {
+    #toolbar, .modal, .drg-btn {
+        display: none !important;
+    }
+    #app .wbjs-content {
+        position: static !important;
+    }
 }

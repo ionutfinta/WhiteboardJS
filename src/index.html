@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Dependencies -->
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./node_modules/jquery-ui-dist/jquery-ui.min.css">
-    <link rel="stylesheet" href="./node_modules/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <!-- Dependencies (CDN so that "Save As" HTML files work standalone) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="icon" href="./favicon.ico"/>
 
     <!-- WhiteboardJS -->
@@ -32,7 +32,7 @@
             </div>
             <div class="card-body p-0 collapse show" id="tools-colapsable">
                 <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-dark active" data-toggle="tooltip" data-placement="right" title="Pointeur, Déplaceur, Sélecteur">
+                    <label class="btn btn-dark active" data-toggle="tooltip" data-placement="right" title="Pointer / Move / Select">
                         <input type="radio" name="toolRadio" id="mouseTool" autocomplete="off" checked> <i class="las la-mouse-pointer"></i>
                     </label>
                     <label class="btn btn-dark">
@@ -76,34 +76,35 @@
     </div>
 
     <!-- Welcome Window -->
-    <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle"> Welcome to WhiteboardJS ! </h5>
+              <h5 class="modal-title" id="welcomeModalTitle"> Welcome to WhiteboardJS! </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              WhiteboardJS is a tiny powerfull whiteboard that you can use everywhere !<br />
-              Close this message and get impressed !
+              WhiteboardJS is a tiny powerful whiteboard that works on any device!<br />
+              Use the toolbar to add text, rectangles, and circles.<br />
+              <strong>Tip:</strong> Save your board anytime with your browser's <em>File &gt; Save As</em> — it saves as a standalone HTML file you can reopen later.
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Let's go!</button>
             </div>
           </div>
         </div>
       </div>
 
-    <!-- jQuery, Popper.js, Bootstrap JS, jQuery-ui, TinyMCE  -->
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap needs popper but not adapted npm... -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="./node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
-    <script src="./node_modules/tinymce/tinymce.min.js"></script>
-    <script src="./node_modules/tinymce/jquery.tinymce.min.js"></script>
+    <!-- jQuery, Popper.js, Bootstrap JS, jQuery-ui, TinyMCE (CDN for portability) -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchpunch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/tinymce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/jquery.tinymce.min.js"></script>
     
     <!-- Whiteboard JS -->
     <script src="jquery.whiteboard.js"></script>
