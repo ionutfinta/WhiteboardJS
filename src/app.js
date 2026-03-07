@@ -1,5 +1,6 @@
 var http = require('http');
 var fs = require('fs');
+var path = require('path');
 
 var PORT = process.env.PORT || 8080;
 
@@ -21,8 +22,10 @@ var mimeTypes = {
     '.json': 'application/json'
 };
 
+var projectRoot = path.resolve(__dirname, '..');
+
 http.createServer(function(request, response) {
-    var url = request.url;
+    var url = request.url.split('?')[0];
 
     if(url.indexOf("node_modules/") < 0)
         url = "/src" + url;
@@ -30,16 +33,25 @@ http.createServer(function(request, response) {
     if(url == "/src/")
         url = "/src/index.html";
 
-    fs.access("." + url,  fs.constants.R_OK, (err) => {
+    var filePath = path.resolve(path.join(projectRoot, url));
+
+    // Prevent path traversal outside the project root
+    if (!filePath.startsWith(projectRoot + path.sep) && filePath !== projectRoot) {
+        response.writeHead(403, {"Content-Type": "text/plain"});
+        response.end("Error 403: Forbidden.");
+        return;
+    }
+
+    fs.access(filePath,  fs.constants.R_OK, (err) => {
         if(err){
             response.writeHead(404, {"Content-Type": "text/plain"});
             response.end("Error 404: The resource you want is not found.");
-            console.log("." + url + " is not readable");
+            console.log(filePath + " is not readable");
         }else{
-            fs.readFile("." + url, function (err, ctt) {
+            fs.readFile(filePath, function (err, ctt) {
                 if (err) throw err;
             
-                var ext = url.substring(url.lastIndexOf('.'));
+                var ext = path.extname(filePath);
                 var contentType = mimeTypes[ext] || 'application/octet-stream';
                 
                 response.writeHead(200, {"Content-Type": contentType});
