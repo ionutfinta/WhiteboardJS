@@ -25,7 +25,7 @@ var mimeTypes = {
 var projectRoot = path.resolve(__dirname, '..');
 
 http.createServer(function(request, response) {
-    var url = request.url.split('?')[0];
+    var url = new URL(request.url, 'http://localhost').pathname;
 
     if(url.indexOf("node_modules/") < 0)
         url = "/src" + url;
@@ -36,7 +36,8 @@ http.createServer(function(request, response) {
     var filePath = path.resolve(path.join(projectRoot, url));
 
     // Prevent path traversal outside the project root
-    if (!filePath.startsWith(projectRoot + path.sep) && filePath !== projectRoot) {
+    var relative = path.relative(projectRoot, filePath);
+    if (relative.startsWith('..') || path.isAbsolute(relative)) {
         response.writeHead(403, {"Content-Type": "text/plain"});
         response.end("Error 403: Forbidden.");
         return;
@@ -49,7 +50,12 @@ http.createServer(function(request, response) {
             console.log(filePath + " is not readable");
         }else{
             fs.readFile(filePath, function (err, ctt) {
-                if (err) throw err;
+                if (err) {
+                    response.writeHead(500, {"Content-Type": "text/plain"});
+                    response.end("Error 500: Internal server error.");
+                    console.error(err);
+                    return;
+                }
             
                 var ext = path.extname(filePath);
                 var contentType = mimeTypes[ext] || 'application/octet-stream';
