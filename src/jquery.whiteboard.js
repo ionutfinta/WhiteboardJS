@@ -3,11 +3,13 @@
  *  -   1   textTool
  *  -   2   rectTool
  *  -   3   circleTool
+ *  -   4   mathsTool
  * ...
  */
 var elID = tool = 0;
 var appSelector = "#app";
 var contentSelector = appSelector + " .wbjs-content";
+var mathInsertCoords = null;
 
 // Helper: get page coordinates from mouse or touch event
 function getEventCoords(event) {
@@ -46,6 +48,10 @@ $(function(){
                 break;
             case "circleTool":
                 tool = 3;
+                $(contentSelector).css("cursor", "crosshair");
+                break;
+            case "mathsTool":
+                tool = 4;
                 $(contentSelector).css("cursor", "crosshair");
                 break;
             //TODO: To be continued...
@@ -182,6 +188,12 @@ $(function(){
                 newEl.resizable();
                 elID++;
                 break;
+            case 4:
+                mathInsertCoords = { pageX: coords.pageX, pageY: coords.pageY, ctTop: ctTop, ctLeft: ctLeft };
+                $("#mathLatexInput").val("");
+                $("#mathPreview").html('<span class="text-muted">Preview will appear here</span>');
+                $("#mathModal").modal("show");
+                break;
         }
     }
 
@@ -207,5 +219,67 @@ $(function(){
                 ignoreNextClick = true;
             }
         }
+    });
+
+    //-- Math formula modal: live preview
+    $("#mathLatexInput").on("input", function() {
+        var latex = $(this).val().trim();
+        if (latex) {
+            try {
+                katex.render(latex, document.getElementById("mathPreview"), { throwOnError: false, displayMode: true });
+            } catch(e) {
+                $("#mathPreview").html('<span class="text-danger">Invalid formula</span>');
+            }
+        } else {
+            $("#mathPreview").html('<span class="text-muted">Preview will appear here</span>');
+        }
+    });
+
+    //-- Math formula modal: insert button
+    $("#mathInsertBtn").on("click", function() {
+        var latex = $("#mathLatexInput").val().trim();
+        if (!latex || !mathInsertCoords) return;
+
+        var rendered = $('<span></span>')[0];
+        try {
+            katex.render(latex, rendered, { throwOnError: false, displayMode: true });
+        } catch(e) {
+            return;
+        }
+
+        var newEl = $(contentSelector).append(
+            '<div class="wbjs-el" id="wbjs-el-'+elID+'">' +
+                '<div class="btn btn-link position-absolute drg-btn"><i class="las la-arrows-alt"></i></div>' +
+                '<div class="wbjs-math p-2"></div>' +
+            '</div>'
+        ).children(":last-child");
+
+        newEl.find(".wbjs-math").append(rendered);
+
+        newEl.css({
+            "position": "absolute",
+            "top": mathInsertCoords.ctTop + mathInsertCoords.pageY,
+            "left": mathInsertCoords.ctLeft + mathInsertCoords.pageX
+        });
+
+        $("#mathModal").modal("hide");
+        $("#mouseTool").trigger("click");
+
+        newEl.draggable({handle: "div.btn", scroll: false});
+        elID++;
+        mathInsertCoords = null;
+    });
+
+    //-- Math formula modal: allow Enter key to insert
+    $("#mathLatexInput").on("keydown", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            $("#mathInsertBtn").trigger("click");
+        }
+    });
+
+    //-- Math formula modal: reset tool on cancel
+    $("#mathModal").on("hidden.bs.modal", function() {
+        mathInsertCoords = null;
     });
 });
