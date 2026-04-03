@@ -281,5 +281,8 @@ $(function(){
     //-- Math formula modal: reset tool on cancel
     $("#mathModal").on("hidden.bs.modal", function() {
         mathInsertCoords = null;
+        if (tool === 4) {
+            $("#mouseTool").trigger("click");
+        }
     });
 });
