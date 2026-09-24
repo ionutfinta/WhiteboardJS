@@ -1,3 +1,6 @@
+This project was for experimenting purpose, just use draw.io instead.
+
+
 # WhiteboardJS
 
 > A tiny, open-source whiteboard that runs in any browser on any device — desktop, tablet, or phone. Draw, write, and save your boards as standalone HTML files.
